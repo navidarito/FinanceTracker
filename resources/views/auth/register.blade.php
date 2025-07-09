@@ -1,7 +1,7 @@
 
 @extends('layouts.app')
 @section('content')
-<section class="h-100 gradient-form" style="background-color: white;">
+<section class="h-100 gradient-form" style="">
   <div class="container py-4 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-xl-5">

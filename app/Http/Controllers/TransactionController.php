@@ -22,6 +22,11 @@ class TransactionController extends Controller
         //return view('transactions.index');
     }
 
+    public function showAddTransactionForm()
+    {
+        return view('transactions.add');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

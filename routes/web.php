@@ -28,3 +28,5 @@ Route::post('/login',[AuthController::class,'login'])->name('login');
 Route::post('/logout',[AuthController::class,'logout'])->name('logout');
 
 Route::get('/transactions',[TransactionController::class,'index']);
+Route::get('/transactions/add',[TransactionController::class,'showAddTransactionForm']);
+Route::post('/transactions',[TransactionController::class,'store'])->name('transactions.store');

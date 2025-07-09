@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
     <div class="container ">
-        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
-                    style="width: 50px;" alt="logo">
-        <a class="navbar-brand" href="#">Finance Tracker</a>
+        
+        <a class="navbar-brand" href="#"> <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                    style="width: 50px;" alt="logo">The Lotus Finance Tracker</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -19,7 +19,7 @@
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="/">Add transaction </a>
+                    <a class="nav-link" href="/transactions/add">Add transaction </a>
                 </li>
 
             @endauth
