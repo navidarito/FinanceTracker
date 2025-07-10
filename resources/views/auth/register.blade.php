@@ -32,7 +32,7 @@
 
                     <div data-mdb-input-init class="form-outline mb-4">
                         <label class="form-label" for="form2Example22">Name</label>
-                        <input type="text"  id="name" name="name" class="form-control" />
+                        <input type="text"  id="name" name="name" class="form-control" value="{{ old('name')}}"/>
                     </div>
 
                     <div data-mdb-input-init class="form-outline mb-4">

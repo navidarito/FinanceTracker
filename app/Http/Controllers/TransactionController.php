@@ -15,9 +15,15 @@ class TransactionController extends Controller
     public function index()
     {
         $transactions = new Transaction();
-       // $transactions = Transaction::where('user_id', auth()->id())->get();
+        $transactions = Transaction::where('user_id', auth()->id())->get();
 
-        return view('transactions.index', compact('transactions'));
+        $totalIncome = $transactions->where('type', 1)->sum('amount');
+        $totalExpenses = $transactions->where('type', 0)->sum('amount');
+        
+
+
+        return view('transactions.index', compact('transactions', 'totalIncome', 'totalExpenses'));
+
 
         //return view('transactions.index');
     }
@@ -45,7 +51,27 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'description' => 'required|string|max:255',
+            'amount' => 'required|numeric',
+            'happened_on' => 'required|date',
+            'type' => 'required|String|in:Income,Expenses',
+        ]);
+
+        $validated['user_id'] = auth()->id();
+
+        if($validated['type'] === 'Income') {
+            $validated['type'] = 1;
+        } else if($validated['type'] === 'Expenses') {
+            $validated['type'] = 0;
+        }
+
+        //dd($validated);
+        //die('here');
+
+        Transaction::create($validated);
+
+        return redirect('/transactions')->with('success', 'Transaction added successfully!');
     }
 
     /**
@@ -65,9 +91,11 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaction $transaction)
+    public function edit($id)
     {
-        //
+        $transaction = Transaction::find($id);
+
+        return view('transactions.edit',compact('transaction'));
     }
 
     /**
@@ -77,9 +105,23 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update(Request $request, $id)
     {
-        //
+        $transaction = Transaction::find($id);
+        $transaction->description = $request->description;
+        $transaction->amount = $request->amount;
+        $transaction->happened_on = $request->happened_on;
+
+        if($request['type'] === 'Income') {
+            $transaction['type'] = 1;
+        } else if($request['type'] === 'Expenses') {
+            $transaction['type'] = 0;
+        }
+        $transaction->save();
+
+        return redirect('/transactions');
+
+
     }
 
     /**
@@ -88,8 +130,10 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaction $transaction)
+    public function destroy($id)
     {
-        //
+        $transaction = Transaction::findOrFail($id);
+        $transaction->delete();
+        return redirect('/transactions')->with('success', 'Transaction delete successfully!');
     }
 }

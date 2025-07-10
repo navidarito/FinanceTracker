@@ -11,12 +11,12 @@
                         <div class="row g-0">
                             <div class="col">
                                 <div class="card-body p-md-5 mx-md-4">
-                                    <form action="{{ route('transaction.store') }}" method="POST">
+                                    <form action="{{ route('transaction.update', $transaction->id) }}" method="POST">
 
                                         @csrf
-                                        @method('POST')
+                                        @method('PUT')
 
-                                        <h1 style="font-family: papyrus">Adding Transaction</h1>
+                                        <h1 style="font-family: papyrus">Editing Transaction</h1>
 
                                         @if ($errors->any())
                                             <ul class="list-group">
@@ -30,28 +30,33 @@
                              
                                         <div data-mdb-input-init class="form-outline mb-4">
                                             <label class="form-label" for="description">Description</label>
-                                            <input type="text"  id="description" name="description" class="form-control" />
+                                            <input type="string"  id="description" name="description" class="form-control" value="{{$transaction->description}}" />
                                         </div>
 
                                         <div data-mdb-input-init class="form-outline mb-4">
                                             <label class="form-label" for="form2Example11">Amount</label>
-                                            <input type="number" id="amount" name="amount" class="form-control" placeholder="" value="{{ old('amount')}}"/>
+                                            <input type="number" id="amount" name="amount" class="form-control" placeholder="" value="{{$transaction->amount}}"/>
                                         </div>
 
                                         <div data-mdb-input-init class="form-outline mb-4">
                                             <label class="form-label" for="happened_on">Date Made</label>
-                                            <input type="DATE"  id="happened_on" name="happened_on" class="form-control" value="{{date('Y-m-d H:i:s')}}" />
+                                            <input type="DATE"  id="happened_on" name="happened_on" class="form-control" value="{{$transaction->happened_on}}" />
                                         </div>
 
                                         <div data-mdb-input-init class="form-outline mb-4">
                                             <label class="form-label" for="happened_on">Type</label>
                                             <select id="type" class="form-control" name="type">
-                                                <option selected value="Income">Income</option>
-                                                <option value="Expenses">Expenses</option>
+                                                @if($transaction->type === 1)
+                                                    <option selected value="Income">Income</option>
+                                                    <option value="Expenses">Expenses</option>
+                                                @else 
+                                                    <option  value="Income">Income</option>
+                                                    <option selected value="Expenses">Expenses</option>
+                                                @endif
                                             </select>
                                         </div>
 
-                                        <input type="submit" class="btn btn-primary" value="Save">
+                                        <input type="submit" class="btn btn-primary" value="Update">
                                     </form>
 
                                 </div>
