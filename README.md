@@ -26,4 +26,5 @@
 
 ### Database :
 
+<img width="675" height="672" alt="schema" src="https://github.com/user-attachments/assets/ad0bbc21-2ced-4a31-b7d4-890f7de74dc9" />
 
