@@ -5,7 +5,7 @@
     <h1 class="text-center my-4" style="font-family: Papyrus">Transactions</h1>
     
     @if($transactions->isEmpty())
-        {{-- Display a message when there are no transactions --}}
+       
         <div class="alert alert-info text-center">
      
             No transactions found.
@@ -43,7 +43,7 @@
             </div>
         </div>
 
-         {{--  <canvas id="myChartPie"  ></canvas> --}}
+       
 
             <div class="bg-white" style="padding-bottom:25px ; border-radius: 10px">
   
@@ -128,16 +128,7 @@
         
         <table class="table table-striped rounded-3" style="  border-radius: 6px;overflow: hidden;" >
             <thead >
-                {{--  <tr style="font-family:Times New Roman;font-size: 25px">
-                    <td class="bg-success"colspan="2"  align="center">Total Incomes:</td>
-                    <td class="bg-success" align="left">{{$totalIncome}}$</td>
-                    <td class="bg-danger" align="center">Total Expenses:</td>
-                    <td class="bg-danger" align="left">{{$totalExpenses}}$</td>
-                 </tr>
-                 <tr style="font-family:Times New Roman;font-size: 25px" class="table-info">
-                    <td colspan="3" align="center" style="font-family:	Times New Roman ">NET INCOME:</td>
-                    <td colspan="2" align="left">{{ $totalIncome - $totalExpenses}}$</td>
-                 </tr>  --}}
+
 
                 <tr>
                

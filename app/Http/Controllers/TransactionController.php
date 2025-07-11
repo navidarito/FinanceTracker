@@ -30,7 +30,7 @@ class TransactionController extends Controller
 
         return view('transactions.index', compact('transactions', 'totalIncome', 'totalExpenses'));
 
-        //return view('transactions.index');
+
     }
 
     public function showAddTransactionForm()
@@ -73,8 +73,7 @@ class TransactionController extends Controller
             $validated['type'] = 0;
         }
 
-        //dd($validated);
-        //die('here');
+
 
         Transaction::create($validated);
 

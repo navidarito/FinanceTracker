@@ -65,18 +65,3 @@ Route::middleware(('auth'))->controller(CategoryController::class)->group(functi
     Route::post('/categories','store')->name('category.store');
 });
 
-/*     
-    Route::get('/register',[AuthController::class,'showRegister'])->name('show.register');
-    Route::get('/login',[AuthController::class,'showLogin'])->name('show.login');
-    Route::post('/register',[AuthController::class,'register'])->name('register');
-    Route::post('/login',[AuthController::class,'login'])->name('login');
-    Route::post('/logout',[AuthController::class,'logout'])->name('logout'); 
-
-    Route::get('/transactions',[TransactionController::class,'index']);
-    Route::get('/transactions/add',[TransactionController::class,'showAddTransactionForm']);
-    Route::post('/transactions',[TransactionController::class,'store'])->name('transaction.store');
-    Route::get('/transactions/{id}',[TransactionController::class,'edit'])->name('transaction.edit');
-    Route::put('/transactions/{id}',[TransactionController::class,'update'])->name('transaction.update');
-    Route::delete('/transactions/{id}', [TransactionController::class,'destroy'])->name('transaction.destroy');
-    
-*/

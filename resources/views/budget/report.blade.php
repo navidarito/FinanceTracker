@@ -130,16 +130,7 @@
 
             <table class="table table-striped rounded-3" style="  border-radius: 6px;overflow: hidden;" >
             <thead >
-                {{--  <tr style="font-family:Times New Roman;font-size: 25px">
-                    <td class="bg-success"colspan="2"  align="center">Total Incomes:</td>
-                    <td class="bg-success" align="left">{{$totalIncome}}$</td>
-                    <td class="bg-danger" align="center">Total Expenses:</td>
-                    <td class="bg-danger" align="left">{{$totalExpenses}}$</td>
-                 </tr>
-                 <tr style="font-family:Times New Roman;font-size: 25px" class="table-info">
-                    <td colspan="3" align="center" style="font-family:	Times New Roman ">NET INCOME:</td>
-                    <td colspan="2" align="left">{{ $totalIncome - $totalExpenses}}$</td>
-                 </tr>  --}}
+
 
                 <tr>
                

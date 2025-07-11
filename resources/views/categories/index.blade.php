@@ -6,7 +6,7 @@
 
 
         @if ($categories->isEmpty())
-            {{-- Display a message when there are no budgets --}}
+    
             <div class="alert alert-info text-center">
                 No categories found.
             </div>

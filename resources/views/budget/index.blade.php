@@ -7,7 +7,6 @@
         
 
         @if ($budgets->isEmpty())
-            {{-- Display a message when there are no budgets --}}
             <div class="alert alert-info text-center">
                 No budgets found.
             </div>

@@ -12,10 +12,9 @@ class BudgetController extends Controller
 {
     public function index()
     {
-        // Logic to display budgets
+
         $month = date('n');
         $budgets = Budget::where('user_id', auth()->id())->whereMonth('start_date',$month)->orderBy('created_at','ASC')->get();
-        //dd($budgets);
         $budgets->each(function ($budget) {
             $budget->category_name = Category::find($budget->category_id)->name ?? 'Uncategorized';
         });
@@ -31,14 +30,14 @@ class BudgetController extends Controller
 
     public function showAddBudgetForm()
     {
-        // Logic to show the form for adding a new budget
+
         $categories = Category::all();
         return view('budget.add', compact('categories'));
     }
 
     public function store(Request $request)
     {
-        // Logic to store a new budget
+
         $validated = $request->validate([
             'description' => 'string|max:1000',
             'amount' => 'required|numeric|regex:/^[\d]{0,11}(\.[\d]{1,2})?$/',
@@ -90,8 +89,6 @@ class BudgetController extends Controller
 
         $categories = Category::all();
         $report = 0;
-      /*   $start_date = null;
-        $end_date = null; */
 
         return view('budget.report', compact('categories','report'));
 
@@ -99,8 +96,7 @@ class BudgetController extends Controller
 
     public function report(Request $request){
         if($request->start_date == null || $request->end_date == null){
-            dd($request);
-            die();
+         
             
             return redirect()->route('budget.showReport')->with('error', 'Please select a valid date range.');
         }else {

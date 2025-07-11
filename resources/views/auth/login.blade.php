@@ -43,12 +43,12 @@
                   <div class="text-center pt-1 mb-1 pb-1">
                     <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Log
                       in</button>
-             {{--        <a class="text-muted" href="#!">Forgot password?</a> --}}
+     
                   </div>
 
                   <div class="d-flex align-items-center justify-content-center pb-4">
                     <p class="mb-0 me-2">Don't have an account?</p>
-                    {{-- <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger" ><a href="{{route('register')}}">Create new</a></button> --}}
+
                     <a href="{{route('show.register')}}">Create new</a>
                   </div>
 
