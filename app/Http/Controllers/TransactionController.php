@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 
@@ -14,23 +15,28 @@ class TransactionController extends Controller
      */
     public function index()
     {
+
+        $month = date('n');
         $transactions = new Transaction();
-        $transactions = Transaction::where('user_id', auth()->id())->get();
+        $transactions = Transaction::where('user_id', auth()->id())->whereMonth('happened_on',$month)->orderBy('happened_on','ASC')->get();
 
         $totalIncome = $transactions->where('type', 1)->sum('amount');
         $totalExpenses = $transactions->where('type', 0)->sum('amount');
+        $transactions->each(function ($transaction){
+            $transaction->category_name = Category::find($transaction->category_id)->name ?? 'Uncategorized';
+        });
+
         
 
-
         return view('transactions.index', compact('transactions', 'totalIncome', 'totalExpenses'));
-
 
         //return view('transactions.index');
     }
 
     public function showAddTransactionForm()
     {
-        return view('transactions.add');
+        $categories = Category::all();
+        return view('transactions.add', compact('categories'));
     }
 
     /**
@@ -56,6 +62,7 @@ class TransactionController extends Controller
             'amount' => 'required|numeric',
             'happened_on' => 'required|date',
             'type' => 'required|String|in:Income,Expenses',
+            'category_id' => 'required'
         ]);
 
         $validated['user_id'] = auth()->id();
@@ -94,8 +101,9 @@ class TransactionController extends Controller
     public function edit($id)
     {
         $transaction = Transaction::find($id);
+        $categories = Category::all();
 
-        return view('transactions.edit',compact('transaction'));
+        return view('transactions.edit',compact('transaction', 'categories'));
     }
 
     /**
@@ -135,5 +143,29 @@ class TransactionController extends Controller
         $transaction = Transaction::findOrFail($id);
         $transaction->delete();
         return redirect('/transactions')->with('success', 'Transaction delete successfully!');
+    }
+
+    public function filter(Request $request){
+        
+
+        if($request->start_date == null || $request->end_date == null){
+           return redirect()->route('transaction.index')->with('error', 'Please select a valid date range.');
+        }else {
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+        $transactions = Transaction::where('user_id', auth()->id())
+            ->whereBetween('happened_on', [$start_date, $end_date])
+            ->orderBy('happened_on','ASC')
+            ->get();
+        }
+
+        $totalIncome = $transactions->where('type', 1)->sum('amount');
+        $totalExpenses = $transactions->where('type', 0)->sum('amount');
+        $transactions->each(function ($transaction){
+            $transaction->category_name = Category::find($transaction->category_id)->name ?? 'Uncategorized';
+        });
+
+        return view('transactions.index', compact('transactions', 'totalIncome', 'totalExpenses'));
+        
     }
 }

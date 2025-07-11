@@ -51,6 +51,16 @@
                                             </select>
                                         </div>
 
+                                        <div data-mdb-input-init class="form-outline mb-4">
+                                            <label class="form-label" for="category_id">Category</label>
+                                            <select id="category_id" class="form-control" name="category_id">
+                                                @foreach ($categories as $category )
+                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                @endforeach
+                                      
+                                            </select>
+                                        </div>
+
                                         <input type="submit" class="btn btn-primary" value="Save">
                                     </form>
 

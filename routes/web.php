@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,17 +39,30 @@ Route::middleware('guest')->controller(AuthController::class)->group(function(){
 });
 
 Route::middleware('auth')->controller(TransactionController::class)->group(function(){
-    Route::get('/transactions','index');
+    Route::get('/transactions','index')->name('transaction.index');
     Route::get('/transactions/add','showAddTransactionForm');
+    Route::get('/transactions/filter', 'filter')->name('transaction.filter');
     Route::post('/transactions','store')->name('transaction.store');
     Route::get('/transactions/{id}','edit')->name('transaction.edit');
     Route::put('/transactions/{id}','update')->name('transaction.update');
     Route::delete('/transactions/{id}', 'destroy')->name('transaction.destroy');
+    
 
 });
 
+Route::middleware('auth')->controller(BudgetController::class)->group(function(){
+    Route::get('/budget/add','showAddBudgetForm');
+    Route::post('/budget','store')->name('budget.store');
+    Route::get('/budget','index')->name('budget.index');
+    Route::get('/budget/filter', 'filter')->name('budget.filter');
 
+});
 
+Route::middleware(('auth'))->controller(CategoryController::class)->group(function(){
+    Route::get('/categories','index');
+    Route::get('/categories/add','showAddCategoryForm')->name('category.add');
+    Route::post('/categories','store')->name('category.store');
+});
 
 /*     
     Route::get('/register',[AuthController::class,'showRegister'])->name('show.register');
