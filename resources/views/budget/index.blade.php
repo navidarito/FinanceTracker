@@ -6,10 +6,6 @@
 
         
 
-        
-
-        
-
         @if ($budgets->isEmpty())
             {{-- Display a message when there are no budgets --}}
             <div class="alert alert-info text-center">
@@ -25,7 +21,7 @@
         <div class="card text-black bg-light mb-3" style="">
   
             <div class="card-body">
-                <h5 class="card-title" style="font-family:cursive;font-size:25px">Net Worth </h5>
+                <h5 class="card-title" style="font-family:cursive;font-size:25px">Remaining Funds</h5>
                 <p class="card-text"  style="font-family:cursive;font-size:100px">{{ $totalBudget-$totalExpenses}}$</p>
             </div>
         </div>

@@ -72,7 +72,7 @@ class BudgetController extends Controller
                 ->where('end_date', '<=', $end_date)
                 ->orderBy('created_at','ASC')
                 ->get();
-            //dd($budgets);
+        
         }
         $totalIncome = $transactions->where('type', 1)->sum('amount');
         $totalExpenses = $transactions->where('type', 0)->sum('amount');
@@ -84,5 +84,61 @@ class BudgetController extends Controller
         $totalBudget = $budgets->sum('amount');
 
         return view('budget.index', compact('budgets', 'totalBudget', 'totalExpenses'));
+    }
+
+    public function showReport(){
+
+        $categories = Category::all();
+        $report = 0;
+      /*   $start_date = null;
+        $end_date = null; */
+
+        return view('budget.report', compact('categories','report'));
+
+    }
+
+    public function report(Request $request){
+        if($request->start_date == null || $request->end_date == null){
+            dd($request);
+            die();
+            
+            return redirect()->route('budget.showReport')->with('error', 'Please select a valid date range.');
+        }else {
+            $start_date = $request->start_date;
+            $end_date = $request->end_date;
+            $transaction = Transaction::where('user_id', auth()->id())
+                ->whereBetween('happened_on', [$start_date, $end_date])
+                ->where('category_id', $request->category_id)
+                ->orderBy('happened_on','ASC')
+                ->get();
+
+            $budgets = Budget::where('user_id', auth()->id())
+                ->where('start_date', '>=', $start_date)
+                ->where('end_date', '<=', $end_date)
+                ->where('category_id', $request->category_id)
+                ->orderBy('created_at','ASC')
+                ->get();
+
+            $totalBudget = $budgets->sum('amount');
+            
+
+            $totalIncome = $transaction->where('type', 1)->sum('amount');
+            $totalExpenses = $transaction->where('type', 0)->sum('amount');
+            $transaction->each(function ($transaction){
+                $transaction->category_name = Category::find($transaction->category_id)->name ?? 'Uncategorized';
+            });
+            $category_name = Category::find($request->category_id)->name;
+
+            $report = 1;
+
+            
+            $categories = Category::all();
+          
+
+            return view('budget.report', compact('report', 'totalIncome', 'totalExpenses', 'categories','transaction', 'totalBudget','budgets','category_name'));
+        }
+
+
+
     }
 }

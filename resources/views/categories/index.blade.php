@@ -11,7 +11,7 @@
                 No categories found.
             </div>
         @else
-            <table class="table table-striped">
+            <table class="table table-striped" style=" border-radius: 6px;overflow: hidden;">
                 <thead>
                     <tr>
                         <th class="text-center">ID</th>

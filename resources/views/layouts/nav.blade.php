@@ -13,7 +13,11 @@
            
 
 
-            @auth
+            @Auth
+                <li class="nav-item">
+                    <a class="nav-link" href="/budget/report">Report</a>   
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="/transactions">Transactions</a>
                 </li>
@@ -21,6 +25,7 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/transactions/add">Add transaction </a>
                 </li>
+                
 
                 <li class="nav-item">
                     <a class="nav-link" href="/budget">Budgets</a>   
@@ -29,9 +34,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/budget/add">Add Budget</a>   
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="/categories">Categories</a>   
                 </li>
+                
                 <li class="nav-item">
                     <a class="nav-link" href="/categories/add">Add Category</a> 
                 </li>

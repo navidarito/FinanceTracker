@@ -23,9 +23,6 @@ Route::get('/home', function () {
     return view('layouts.app');
 }); 
 
-Route::get('/', function () {
-    return view('auth.login');
-}); 
 
 
 Route::post('/logout',[AuthController::class,'logout'])->name('logout');
@@ -35,6 +32,8 @@ Route::middleware('guest')->controller(AuthController::class)->group(function(){
     Route::get('/login','showLogin')->name('show.login');
     Route::post('/register','register')->name('register');
     Route::post('/login','login')->name('login');
+    Route::get('/', function () {return view('auth.login');
+}); 
 
 });
 
@@ -52,6 +51,8 @@ Route::middleware('auth')->controller(TransactionController::class)->group(funct
 
 Route::middleware('auth')->controller(BudgetController::class)->group(function(){
     Route::get('/budget/add','showAddBudgetForm');
+    Route::get('/budget/report','showReport')->name('budget.showReport');
+    Route::post('/budget/report/','report')->name('budget.report');
     Route::post('/budget','store')->name('budget.store');
     Route::get('/budget','index')->name('budget.index');
     Route::get('/budget/filter', 'filter')->name('budget.filter');
